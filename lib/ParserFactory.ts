@@ -19,6 +19,7 @@ import { WavPackParser } from './wavpack/WavPackParser';
 import { DsfParser } from './dsf/DsfParser';
 import { DsdiffParser } from './dsdiff/DsdiffParser';
 import { MatroskaParser } from './matroska/MatroskaParser';
+import { AmrParser } from './amr/AmrParser';
 
 const debug = _debug('music-metadata:parser:factory');
 
@@ -175,6 +176,9 @@ export class ParserFactory {
       case '.mks':
       case '.webm':
         return 'matroska';
+
+      case '.amr':
+        return 'amr';
     }
   }
 
@@ -195,6 +199,7 @@ export class ParserFactory {
       case 'riff': return new WaveParser();
       case 'wavpack': return new WavPackParser();
       case 'matroska': return new MatroskaParser();
+      case 'amr': return new AmrParser();
       default:
         throw new Error(`Unknown parser type: ${moduleName}`);
     }
@@ -285,6 +290,9 @@ export class ParserFactory {
 
           case 'dsf':
             return 'dsf';
+
+          case 'amr':
+            return 'amr';
         }
         break;
 
