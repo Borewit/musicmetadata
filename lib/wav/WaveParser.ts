@@ -9,6 +9,7 @@ import { ID3v2Parser } from '../id3v2/ID3v2Parser';
 import * as util from '../common/Util';
 import { FourCcToken } from '../common/FourCC';
 import { BasicParser } from '../common/BasicParser';
+import { BroadcastAudioExtensionChunk } from '../wav/BwfChunk';
 
 const debug = initDebug('music-metadata:parser:RIFF');
 
@@ -120,6 +121,19 @@ export class WaveParser extends BasicParser {
           }
 
           this.metadata.setFormat('bitrate', this.metadata.format.numberOfChannels * this.blockAlign * this.metadata.format.sampleRate); // ToDo: check me
+          await this.tokenizer.ignore(header.chunkSize);
+          break;
+
+        case 'bext': // Broadcast Audio Extension chunk	https://tech.ebu.ch/docs/tech/tech3285.pdf
+          const bext = await this.tokenizer.readToken(BroadcastAudioExtensionChunk);
+          Object.keys(bext).forEach(key => {
+            this.metadata.addTag('exif', 'bext.' + key, bext[key]);
+          });
+          break;
+
+        case '\x00\x00\x00\x00': // padding ??
+          debug(`Ignore padding chunk: RIFF/${header.chunkID} of ${header.chunkSize} bytes`);
+          this.metadata.addWarning('Ignore chunk: RIFF/' + header.chunkID);
           await this.tokenizer.ignore(header.chunkSize);
           break;
 
