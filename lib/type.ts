@@ -528,6 +528,15 @@ export interface IChapter {
    * Duration offset is sampleOffset / format.sampleRate
    */
   sampleOffset: number;
+  /**
+   * Timestamp where the chapter starts
+   * Chapter timestamp is start/timeScale in seconds.
+   */
+  start: number;
+  /**
+   * Time value that indicates the time scale for chapter tracks, the number of time units that pass per second in its time coordinate system.
+   */
+  timeScale: number;
 }
 
 /**

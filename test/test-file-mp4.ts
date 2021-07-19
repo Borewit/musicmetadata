@@ -202,58 +202,86 @@ describe('Parse MPEG-4 files with iTunes metadata', () => {
           assert.deepEqual(format.chapters, [
             {
               sampleOffset: 45056,
+              timeScale: 44100,
+              start: 0,
               title: '01 - Baby\'s Opera: 01 - Girls and Boys'
             },
             {
               sampleOffset: 2695168,
+              timeScale: 44100,
+              start: 2690214,
               title: '02 - Baby\'s Opera: 02 - The Mulberry Bush'
             },
             {
               sampleOffset: 5083136,
+              timeScale: 44100,
+              start: 5072343,
               title: '03 - Baby\'s Opera: 03 - Oranges and Lemons'
             },
             {
               sampleOffset: 8352768,
+              timeScale: 44100,
+              start: 8335466,
               title: '04 - Baby\'s Opera: 04 - St. Paul\'s Steeple'
             },
             {
               sampleOffset: 10544128,
+              timeScale: 44100,
+              start: 10539994,
               title: '05 - Baby\'s Opera: 05 - My Lady\'s Garden'
             },
             {
               sampleOffset: 12284928,
+              timeScale: 44100,
+              start: 12260367,
               title: '06 - Baby\'s Opera: 12 - Dickory Dock'
             },
             {
               sampleOffset: 14125056,
+              timeScale: 44100,
+              start: 14112293,
               title: '07 - Baby\'s Opera: 22 - Baa!Baa!Black Sheep'
             },
             {
               sampleOffset: 16410624,
+              timeScale: 44100,
+              start: 16405319,
               title: '08 - Baby\'s Bouquet: 01 - Dedication and Polly put the Kettle On'
             },
             {
               sampleOffset: 19068928,
+              timeScale: 44100,
+              start: 19051667,
               title: '09 - Baby\'s Bouquet: 02 - Hot Cross Buns'
             },
             {
               sampleOffset: 21685248,
+              timeScale: 44100,
+              start: 21653824,
               title: '10 - Baby\'s Bouquet: 03 - The Little Woman and the Pedlar'
             },
             {
               sampleOffset: 30461952,
+              timeScale: 44100,
+              start: 30429742,
               title: '11 - Baby\'s Bouquet: 04 - The Little Disaster'
             },
             {
               sampleOffset: 37761024,
+              timeScale: 44100,
+              start: 37750318,
               title: '12 - Baby\'s Bouquet: 05 - The Old Woman of Norwich'
             },
             {
               sampleOffset: 39628800,
+              timeScale: 44100,
+              start: 39602731,
               title: '13 - Baby\'s Bouquet: 12 - Lucy Locket'
             },
             {
               sampleOffset: 41500672,
+              timeScale: 44100,
+              start: 41498151,
               title: '14 - Baby\'s Bouquet: 18 - The North Wind & the Robin'
             }
           ]);
