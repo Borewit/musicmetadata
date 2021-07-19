@@ -144,6 +144,18 @@ export class MP4Parser extends BasicParser {
     return value.readUIntBE(0, value.length);
   }
 
+  /**
+   * Get duration in number of sample of track
+   * @return Number of samples
+   */
+  private static getTrackDuration(track: ITrackDescription): number {
+    let totalDuration = 0;
+    track.timeToSampleTable.forEach(ttst => {
+      totalDuration += ttst.count * ttst.duration / track.soundSampleDescription[0].description.sampleRate;
+    });
+    return totalDuration;
+  }
+
   private audioLengthInBytes: number;
   private tracks: ITrackDescription[];
 
@@ -216,7 +228,7 @@ export class MP4Parser extends BasicParser {
     if (audioTracks.length >= 1) {
       const audioTrack = audioTracks[0];
 
-      const duration = audioTrack.duration / audioTrack.timeScale;
+      const duration = audioTrack.timeScale > 0 ? audioTrack.duration / audioTrack.timeScale : MP4Parser.getTrackDuration(audioTrack);
       this.metadata.setFormat('duration', duration); // calculate duration in seconds
 
       const ssd = audioTrack.soundSampleDescription[0];
@@ -570,18 +582,10 @@ export class MP4Parser extends BasicParser {
   }
 
   private findSampleOffset(track: ITrackDescription, chapterOffset: number): number {
-
-    let totalDuration = 0;
-    track.timeToSampleTable.forEach(e => {
-      totalDuration += e.count * e.duration;
-    });
-    debug(`Total duration=${totalDuration}`);
-
     let chunkIndex = 0;
     while (chunkIndex < track.chunkOffsetTable.length && track.chunkOffsetTable[chunkIndex] < chapterOffset) {
       ++chunkIndex;
     }
-
     return this.getChunkDuration(chunkIndex + 1, track);
   }
 
