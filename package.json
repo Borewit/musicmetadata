@@ -95,7 +95,7 @@
     "@types/chai": "^4.2.21",
     "@types/debug": "^4.1.6",
     "@types/file-type": "^10.9.1",
-    "@types/mocha": "^8.2.3",
+    "@types/mocha": "^9.0.0",
     "@types/node": "^16.4.0",
     "chai": "^4.3.4",
     "coveralls": "^3.1.1",
